@@ -41,7 +41,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "hospital";
 
 // Create connection

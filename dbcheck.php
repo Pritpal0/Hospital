@@ -4,7 +4,7 @@
 $dbhost = 'localhost';
 $dbname = 'hospital';
 $username = 'root';
-$pw = '';
+$password = 'root';
 
 
 $connection = mysqli_connect($dbhost, $username, $pw, $dbname);
