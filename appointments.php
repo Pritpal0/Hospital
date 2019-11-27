@@ -27,7 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="addpatient.php">Add Patient</a></li>
           <li><a href="availabledoctors.php">Available Doctors</a></li>
-          <li><a href="appointments.php">Appointments</a></li>
+          <li><a href="appointments.php">Manage Appointments</a></li>
 		  <li><a href="addappointment.php">Add Appointment</a></li>
         </ul>
       </div>
@@ -38,3 +38,67 @@
 <br>
 <br>
 
+
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "hospital";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) 
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Appt_Patient_ID 
+  FROM Appointment
+  INNER JOIN AppointmentType ON Appointment.Type_ID = AppointmentType.Appt_Type_ID";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0 ) 
+{
+    echo "<table>
+  <tr>
+    <th>ID</th>
+    <th>Patient ID</th>
+    <th>Appointment Type</th>
+    <th>Doctor Name</th>
+    <th>Appointment Date</th>
+    <th>Appointment Time</th>
+    <th></th>
+  </tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc() ) 
+    {
+        $ID = $row["AppointmentID"];
+
+        echo "<tr><td>" . $row["AppointmentID"] . 
+          "</td><td>". $row["Appt_Patient_ID"] .
+          "</td><td>". $row["Appt_Type"] .
+          "</td><td>" . $row["Doctor_Name"] . 
+          "</td><td>" . $row["Appointment_Date"] . 
+          "</td><td>" . $row["Appointment_Time"] .
+          "</td><td onclick='deleteAppointment($ID)'> DELETE </td><tr>";
+    } 
+    echo "</table>";
+
+}
+$conn->close();
+?>
+
+<script>
+  function deleteAppointment(id)
+  {
+    var data = new FormData();
+    data.append('AppointmentID', id);
+
+    const Http = new XMLHttpRequest();
+    const url='deleteappointment.php';
+    Http.open("POST", url, true);
+    Http.send(data);
+  }
+</script>

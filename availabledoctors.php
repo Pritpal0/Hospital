@@ -27,7 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="addpatient.php">Add Patient</a></li>
           <li><a href="availabledoctors.php">Available Doctors</a></li>
-          <li><a href="appointments.php">Appointments</a></li>
+          <li><a href="appointments.php">Manage Appointments</a></li>
 		  <li><a href="addappointment.php">Add Appointment</a></li>
         </ul>
       </div>
@@ -47,34 +47,46 @@ $dbname = "hospital";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-if ($conn->connect_error) {
+if ($conn->connect_error) 
+{
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT DoctorID, First, Last, SSN, Gender, DateOfBirth, Start_Date, Patient_ID, Dept_ID FROM doctor";
+$sql = "SELECT COUNT(DoctorID), DoctorID, Doctor.First, Doctor.Last, DeptID, Dept_Name FROM Department
+    INNER JOIN Doctor
+    ON Department.DeptID = Doctor.Dept_ID
+    INNER JOIN Patient
+    ON Department.DeptID = Patient.Dept_ID
+    GROUP BY DoctorID
+    HAVING Count(DoctorID) < 5";
+
 $result = $conn->query($sql);
 
 
-if ($result->num_rows > 0 ) {
+if ($result->num_rows > 0 ) 
+{
     echo "<table>
 	<tr>
 		<th>ID</th>
 		<th>Name</th>
-		<th>SSN</th>
-		<th>Gender</th>
-		<th>Date of Birth</th>
-		<th>Start Date</th>
-		<th>PatientID</th>
+		<th># of Patients</th>
 		<th>Department ID</th>
+		<th>Department Name</th>
 	</tr>";
     // output data of each row
-    while($row = $result->fetch_assoc() ) {
-        echo "<tr><td>".$row["DoctorID"]."</td><td>". $row["First"] ," ". $row["Last"] ."</td><td>" . $row["SSN"] ."</td><td>" . $row["Gender"] ."</td><td>" . $row["DateOfBirth"] ."</td><td>". $row["Start_Date"] . "</td><td>" . $row["Patient_ID"] ."</td><td>" . $row["Dept_ID"] . 
-         "</td><tr>";}
-   echo "</table>";
-} else {
-    echo "0 results";
-}
+    while($row = $result->fetch_assoc() ) 
+    {
+        echo "<tr><td>" . $row["DoctorID"] . 
+          "</td><td>". $row["First"] ," ". $row["Last"] .
+          "</td><td>" . $row["COUNT(DoctorID)"] . 
+          "</td><td>" . $row["DeptID"] . 
+          "</td><td>" . $row["Dept_Name"] .
+          "</td><td>" . $row["Count"] .
+          "</td><tr>";
+    } 
+    echo "</table>";
 
+}
 $conn->close();
+
 ?>

@@ -17,7 +17,7 @@ if (!empty($PatientID) || !empty($First) || !empty($Last) || !empty($SSN) || !em
 	|| !empty($Date_Of_Birth)|| !empty($Dept_ID)){
 		
     //create connection
-    $link = mysqli_connect("localhost", "root", "", "hospital");
+    $link = mysqli_connect("localhost", "root", "root", "hospital");
     if (mysqli_connect_error()) {
         echo("ADSFASFSAFD");
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
@@ -31,6 +31,8 @@ if (!empty($PatientID) || !empty($First) || !empty($Last) || !empty($SSN) || !em
      
      if(mysqli_query($link, $INSERT)){
          echo "Records added successfully.";
+         header("Location: http://localhost:8888/hospital");
+         exit();
      } else{
          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
      }

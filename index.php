@@ -27,7 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="addpatient.php">Add Patient</a></li>
           <li><a href="availabledoctors.php">Available Doctors</a></li>
-          <li><a href="appointments.php">Appointments</a></li>
+          <li><a href="appointments.php">Manage Appointments</a></li>
 		  <li><a href="addappointment.php">Add Appointment</a></li>
         </ul>
       </div>

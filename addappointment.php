@@ -16,7 +16,13 @@ if ($conn->connect_error) {
 }
 
 $sql = "SELECT PatientID, First, Last FROM patient";
-$results = $conn->query($sql);
+$patients = $conn->query($sql);
+
+$sql = "SELECT DoctorID, First, Last FROM doctor";
+$doctors = $conn->query($sql);
+
+$sql = "SELECT Appt_Type, Appt_Type_ID FROM AppointmentType";
+$appointmentTypes = $conn->query($sql);
 
 ?>
 
@@ -50,7 +56,7 @@ $results = $conn->query($sql);
         <ul class="nav navbar-nav navbar-right">
           <li><a href="addpatient.php">Add Patient</a></li>
           <li><a href="availabledoctors.php">Available Doctors</a></li>
-          <li><a href="appointments.php">Appointments</a></li>
+          <li><a href="appointments.php">Manage Appointments</a></li>
 		  <li><a href="addappointment.php">Add Appointment</a></li>
         </ul>
       </div>
@@ -71,9 +77,9 @@ $results = $conn->query($sql);
     <td>Patient ID :</td>
 
     <td>
-      <select>
+      <select name="PatientID" required>
         <?php
-            while ($rows = $results->fetch_assoc()) {
+            while ($rows = $patients->fetch_assoc()) {
                $patientID = $rows['PatientID'];
                $fname = $rows['First'];
                $lname = $rows['Last'];
@@ -88,23 +94,46 @@ $results = $conn->query($sql);
 
    <tr>
     <td>Date of Appointment :</td>
-    <td><input type="date" name="Date_Of_Birth" required></td>
+    <td><input type="date" name="AppointmentDate" required></td>
    </tr>
    <tr>
    
    
     <td>Time :</td>
-    <td><input type="number" name="SSN" required></td>
+    <td><input type="time" name="AppointmentTime" required></td>
    </tr>   
    <tr>
-   
-   
+  
     <td>Doctor's Name :</td>
     <td>
-     <input type="radio" name="Gender" value="m" required>Male
-     <input type="radio" name="Gender" value="f" required>Female
+      <select name="DoctorName" required>
+        <?php
+            while ($rows = $doctors->fetch_assoc()) {
+               $name = $rows['First'] . $rows['Last'];
+               echo "<option value='$name'>$name</option>";
+            }
+        ?>
+      </select>
+    </td>
+
+   </tr>
+
+   <tr>
+    <td>Appointment Type :</td>
+    <td>
+      <select name="AppointmentTypeID" required>
+        <?php
+            while ($rows = $appointmentTypes->fetch_assoc()) {
+               $name = $rows['Appt_Type'];
+               $ID = $rows['Appt_Type_ID'];
+               echo "<option value='$ID'>$name</option>";
+            }
+        ?>
+      </select>
     </td>
    </tr>
+
+
    <tr>
    
     <td><input type="submit" value="submit"></td>
