@@ -79,8 +79,8 @@
    
     <td>Gender :</td>
     <td>
-     <input type="radio" name="Gender" value="m" required>Male
-     <input type="radio" name="Gender" value="f" required>Female
+     <input type="radio" name="Gender" value="M" required>Male
+     <input type="radio" name="Gender" value="F" required>Female
     </td>
    </tr>
    <tr>

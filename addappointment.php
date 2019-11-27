@@ -1,3 +1,26 @@
+<?php
+
+// Select Patients
+// Get ID
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "Hospital";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT PatientID, First, Last FROM patient";
+$results = $conn->query($sql);
+
+?>
+
+
 <!DOCTYPE html>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,3 +60,54 @@
 <br>
 <br>
 <br>
+
+<h1>Add New Appointment<h1>
+
+<form action="insertappointment.php" method="POST">
+  <table>
+  
+  
+   <tr>
+    <td>Patient ID :</td>
+
+    <td>
+      <select>
+        <?php
+            while ($rows = $results->fetch_assoc()) {
+               $patientID = $rows['PatientID'];
+               $fname = $rows['First'];
+               $lname = $rows['Last'];
+               echo "<option value='$patientID'>$fname $lname</option>";
+            }
+        ?>
+      </select>
+    </td>
+    
+  </tr>
+   
+
+   <tr>
+    <td>Date of Appointment :</td>
+    <td><input type="date" name="Date_Of_Birth" required></td>
+   </tr>
+   <tr>
+   
+   
+    <td>Time :</td>
+    <td><input type="number" name="SSN" required></td>
+   </tr>   
+   <tr>
+   
+   
+    <td>Doctor's Name :</td>
+    <td>
+     <input type="radio" name="Gender" value="m" required>Male
+     <input type="radio" name="Gender" value="f" required>Female
+    </td>
+   </tr>
+   <tr>
+   
+    <td><input type="submit" value="submit"></td>
+   </tr>
+  </table>
+ </form>
