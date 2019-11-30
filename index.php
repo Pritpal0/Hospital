@@ -42,7 +42,10 @@
 
 require 'dbcheck.inc.php';
 
-$sql = "SELECT PatientID, First, Last, SSN, Gender, Phone, Street, City, State, ZipCode, Date_Of_Birth, Dept_ID FROM patient";
+$sql = "SELECT PatientID, First, Last, SSN, Gender, Phone, Street, City, State, ZipCode, Date_Of_Birth, Dept_ID, Dept_Name
+FROM patient
+INNER JOIN department
+Where Patient.Dept_ID = Department.DeptID";
 $result = $conn->query($sql);
 
 
@@ -56,11 +59,12 @@ if ($result->num_rows > 0 ) {
 		<th>Phone Number</th>
 		<th>Address</th>
 		<th>Date of Birth</th>
-		<th>Department ID</th>
+		<th>Department</th>
 	</tr>";
     // output data of each row
     while($row = $result->fetch_assoc() ) {
-        echo 
+        echo
+         
         "<tr><td>".$row["PatientID"].
         "</td><td>". $row["First"] ," ". $row["Last"] .
         "</td><td>" . $row["SSN"] .
@@ -68,7 +72,7 @@ if ($result->num_rows > 0 ) {
         "</td><td>" . $row["Phone"] .
         "</td><td>". $row["Street"] ," ". $row["City"]," " .$row["State"] ," ".$row["ZipCode"].
         "</td><td>" . $row["Date_Of_Birth"] .
-        "</td><td>" . $row["Dept_ID"] . 
+        "</td><td>" . $row["Dept_Name"] . 
         "</td><tr>";
       }
    echo "</table>";
