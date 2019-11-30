@@ -169,12 +169,12 @@
     <td>
      <select name="Dept_ID" required>
       <option selected hidden value="deptid">Select Code</option>
-      <option value="1">ID 1 Info</option>
-      <option value="2">ID 2 Info</option>
-      <option value="3">ID 3 Info</option>
-      <option value="4">ID 4 Info</option>
-      <option value="5">ID 5 Info</option>
-      <option value="6">ID 6 Info</option>
+      <option value="1">Cancer</option>
+      <option value="2">Cardiology</option>
+      <option value="3">Neurology</option>
+      <option value="4">Intensive Care</option>
+      <option value="5">Emergency</option>
+      <option value="6">Maternity</option>
      </select>
     </td>
    </tr>

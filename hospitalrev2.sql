@@ -125,14 +125,15 @@ INSERT INTO Department (DeptID, Dept_Name, Capacity)
  
 INSERT INTO PATIENT (PatientID, First, Last, SSN, Gender, Phone, Street, City, State, ZipCode, Date_Of_Birth, Dept_ID)
 	VALUES(654321, "Jane", "Doe", 654321, "F", 0203945,"A","B","C",64081, '1997-04-25', 1),
-		(654323, "Angad", "Singh", 654324, "F", 0203945,"A","B","C",64081, '1997-04-25', 1),
-		(123444, "Sweaty", "Palms", 654343, "M", 0203945,"A","B","C",64081, '1997-04-25', 2),
-		(125904, "Pritpal", "Singh", 654393, "M", 0213945,"A","B","C",64081, '1997-05-27', 1);
+		(654323, "Barb", "Stens", 654324, "F", 0203945,"A","B","C",64081, '1997-04-25', 1),
+		(123444, "Robert", "Smith", 654343, "M", 0203945,"A","B","C",64081, '1997-04-25', 2),
+		(125904, "Joshua", "Whiteman", 654393, "M", 0213945,"A","B","C",64081, '1997-05-27', 1);
 
 INSERT INTO Doctor (DoctorID, First, Last, SSN, Gender, DateOfBirth, Start_Date, Patient_ID, Dept_ID) 
 	VALUES (123456, "John","Doe", 123456, "M", '1990-02-15', '2000-04-20',654321, 1 ),
 		   (123457, "Jim","Deer", 123457, "M", '1990-02-15', '2000-04-20',654323, 1 ),
-		   (123458, "Jorge","Elk", 1234557, "M", '1990-02-15', '2000-04-20',654323, 2 );
+		   (123458, "Edward","Elk", 1234557, "M", '1990-02-15', '2000-04-20',654323, 2 );
+		   (123458, "Edward","Elk", 1234557, "M", '1990-02-15', '2000-04-20',654323, 2 );
     
 INSERT INTO AppointmentType(Appt_Type, Appt_Type_ID)
     VALUES ("Surgery",  1),
