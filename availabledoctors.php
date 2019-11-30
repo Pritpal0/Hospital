@@ -39,18 +39,7 @@
 <br>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "hospital";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) 
-{
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'dbcheck.inc.php';
 
 $sql = "SELECT COUNT(DoctorID), DoctorID, Doctor.First, Doctor.Last, DeptID, Dept_Name FROM Department
     INNER JOIN Doctor
@@ -76,12 +65,14 @@ if ($result->num_rows > 0 )
     // output data of each row
     while($row = $result->fetch_assoc() ) 
     {
-        echo "<tr><td>" . $row["DoctorID"] . 
+        echo 
+          "<tr><td>" . $row["DoctorID"] . 
           "</td><td>". $row["First"] ," ". $row["Last"] .
           "</td><td>" . $row["COUNT(DoctorID)"] . 
           "</td><td>" . $row["DeptID"] . 
           "</td><td>" . $row["Dept_Name"] .
-          "</td><td>" . $row["Count"] .
+          //don't need, unnecessary
+          //"</td><td>" . $row["Count"] .
           "</td><tr>";
     } 
     echo "</table>";

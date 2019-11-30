@@ -3,17 +3,7 @@
 // Select Patients
 // Get ID
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "Hospital";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'dbcheck.inc.php';
 
 $sql = "SELECT PatientID, First, Last FROM patient";
 $patients = $conn->query($sql);

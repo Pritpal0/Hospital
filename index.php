@@ -39,17 +39,8 @@
 <br>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "Hospital";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'dbcheck.inc.php';
 
 $sql = "SELECT PatientID, First, Last, SSN, Gender, Phone, Street, City, State, ZipCode, Date_Of_Birth, Dept_ID FROM patient";
 $result = $conn->query($sql);
@@ -69,8 +60,17 @@ if ($result->num_rows > 0 ) {
 	</tr>";
     // output data of each row
     while($row = $result->fetch_assoc() ) {
-        echo "<tr><td>".$row["PatientID"]."</td><td>". $row["First"] ," ". $row["Last"] ."</td><td>" . $row["SSN"] ."</td><td>" . $row["Gender"] ."</td><td>" . $row["Phone"] ."</td><td>". $row["Street"] ," ". $row["City"]," " .$row["State"] ," ".$row["ZipCode"]."</td><td>" . $row["Date_Of_Birth"] ."</td><td>" . $row["Dept_ID"] . 
-         "</td><tr>";}
+        echo 
+        "<tr><td>".$row["PatientID"].
+        "</td><td>". $row["First"] ," ". $row["Last"] .
+        "</td><td>" . $row["SSN"] .
+        "</td><td>" . $row["Gender"] .
+        "</td><td>" . $row["Phone"] .
+        "</td><td>". $row["Street"] ," ". $row["City"]," " .$row["State"] ," ".$row["ZipCode"].
+        "</td><td>" . $row["Date_Of_Birth"] .
+        "</td><td>" . $row["Dept_ID"] . 
+        "</td><tr>";
+      }
    echo "</table>";
 } else {
     echo "0 results";
@@ -80,6 +80,3 @@ $conn->close();
 ?>
 <body>
 </head>
-
-
-

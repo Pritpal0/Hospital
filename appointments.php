@@ -41,18 +41,7 @@
 
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "hospital";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) 
-{
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'dbcheck.inc.php';
 
 $sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Appt_Patient_ID 
   FROM Appointment
@@ -82,12 +71,14 @@ if ($result->num_rows > 0 )
           "</td><td>" . $row["Doctor_Name"] . 
           "</td><td>" . $row["Appointment_Date"] . 
           "</td><td>" . $row["Appointment_Time"] .
-          "</td><td onclick='deleteAppointment($ID)'> DELETE </td><tr>";
+          "</td><td onclick='deleteAppointment($ID)'> <button> DELETE </button> </td><tr>";
     } 
     echo "</table>";
 
 }
 $conn->close();
+
+
 ?>
 
 <script>

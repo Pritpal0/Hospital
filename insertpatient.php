@@ -1,5 +1,7 @@
 <?php
 
+require 'dbcheck.inc.php';
+
 @$PatientID = $_POST['PatientID'];
 @$First = $_POST['First'];
 @$Last = $_POST['Last'];
@@ -15,28 +17,23 @@
 
 if (!empty($PatientID) || !empty($First) || !empty($Last) || !empty($SSN) || !empty($Gender) || !empty($Phone)|| !empty($Street)|| !empty($City)|| !empty($State)|| !empty($ZipCode)
 	|| !empty($Date_Of_Birth)|| !empty($Dept_ID)){
-		
-    //create connection
-    $link = mysqli_connect("localhost", "root", "root", "hospital");
-    if (mysqli_connect_error()) {
-        echo("ADSFASFSAFD");
-     die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
-    } else {
-	
-    
+
      $INSERT = "INSERT Into patient 
      (PatientID, First, Last, SSN, Gender, Phone, Street, City, State, ZipCode, Date_Of_Birth, Dept_ID ) 
      values('$PatientID', '$First', '$Last', '$SSN', '$Gender', '$Phone', '$Street', '$City', '$State', '$ZipCode', '$Date_Of_Birth', '$Dept_ID')";
     
      
-     if(mysqli_query($link, $INSERT)){
+     if(mysqli_query($conn, $INSERT)){
          echo "Records added successfully.";
-         header("Location: http://localhost:8888/hospital");
+         //header("Location: http://localhost:8888/hospital");
+         header( "refresh:3;url=index.php" );
          exit();
+         
+
      } else{
-         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+         echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
      }
-    }
+    
 } else {
 	echo "All field are required";
  die();
