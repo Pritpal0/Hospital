@@ -99,7 +99,7 @@ $appointmentTypes = $conn->query($sql);
       <select name="DoctorName" required>
         <?php
             while ($rows = $doctors->fetch_assoc()) {
-               $name = $rows['First'] . $rows['Last'];
+               $name = "Dr. ". $rows['First']." " . $rows['Last'];
                echo "<option value='$name'>$name</option>";
             }
         ?>
