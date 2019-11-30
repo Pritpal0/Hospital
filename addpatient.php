@@ -168,7 +168,7 @@
     <td>Dept ID :</td>
     <td>
      <select name="Dept_ID" required>
-      <option selected hidden value="deptid">Select Code</option>
+      <option selected hidden value="deptid">Select Department</option>
       <option value="1">Cancer</option>
       <option value="2">Cardiology</option>
       <option value="3">Neurology</option>
