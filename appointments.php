@@ -89,7 +89,6 @@ $conn->close();
   {
     var data = new FormData();
     data.append('AppointmentID', id);
-
     const Http = new XMLHttpRequest();
     const url='deleteappointment.php';
     Http.open("POST", url, true);

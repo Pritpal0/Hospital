@@ -1,4 +1,6 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // The request is using the POST method
 
 require 'dbcheck.inc.php';
 
@@ -39,4 +41,10 @@ if (!empty($PatientID) || !empty($First) || !empty($Last) || !empty($SSN) || !em
  die();
 }
 
+}
+
+else
+{
+    echo "sike, that's the wrong link";
+}
 ?>

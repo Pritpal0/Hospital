@@ -1,5 +1,6 @@
 <?php
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // The request is using the POST method
 require 'dbcheck.inc.php';
 $PatientID = $_POST['PatientID'];
 $AppointmentID = rand(1, 99999);
@@ -28,5 +29,9 @@ if (!empty($PatientID) || !empty($AppointmentID) || !empty($DoctorName) || !empt
 	echo "All field are required";
  die();
 }
-
+}
+else
+{
+    echo "sike, that's the wrong link";
+}
 ?>
