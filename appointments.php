@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Local Hospital</title>
+  <title>North Star Hospital</title>
 
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -21,7 +21,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">Local<span>Hospital</span></a>
+        <a class="navbar-brand" href="index.php">North Star<span>Hospital</span></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -43,9 +43,10 @@
 <?php
 require 'dbcheck.inc.php';
 
-$sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Appt_Patient_ID 
-  FROM Appointment
-  INNER JOIN AppointmentType ON Appointment.Type_ID = AppointmentType.Appt_Type_ID";
+$sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Patient.First, patient.Last
+FROM Appointment
+INNER JOIN Patient
+INNER JOIN AppointmentType ON Appointment.Type_ID = AppointmentType.Appt_Type_ID";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0 ) 
@@ -66,7 +67,7 @@ if ($result->num_rows > 0 )
         $ID = $row["AppointmentID"];
 
         echo "<tr><td>" . $row["AppointmentID"] . 
-          "</td><td>". $row["Appt_Patient_ID"] .
+          "</td><td>". $row["First"] ," ". $row["Last"].
           "</td><td>". $row["Appt_Type"] .
           "</td><td>" . $row["Doctor_Name"] . 
           "</td><td>" . $row["Appointment_Date"] . 
