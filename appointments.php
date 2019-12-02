@@ -43,9 +43,8 @@
 <?php
 require 'dbcheck.inc.php';
 
-$sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Patient.First, patient.Last
+$sql = "SELECT AppointmentID, Type_ID, AppointmentType.Appt_Type, Doctor_Name, Appointment_Time, Appointment_Date, Appt_Patient_ID 
 FROM Appointment
-INNER JOIN Patient
 INNER JOIN AppointmentType ON Appointment.Type_ID = AppointmentType.Appt_Type_ID";
 $result = $conn->query($sql);
 
@@ -67,7 +66,7 @@ if ($result->num_rows > 0 )
         $ID = $row["AppointmentID"];
 
         echo "<tr><td>" . $row["AppointmentID"] . 
-          "</td><td>". $row["First"] ," ". $row["Last"].
+          "</td><td>". $row["Appt_Patient_ID"] .
           "</td><td>". $row["Appt_Type"] .
           "</td><td>" . $row["Doctor_Name"] . 
           "</td><td>" . $row["Appointment_Date"] . 

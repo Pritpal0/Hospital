@@ -29,6 +29,35 @@ else
 }
 else
 {
-    echo "sike, that's the wrong link";
+    $dir_path = "img/";
+    $extensions_array = array('jpg','png','jpeg');
+    
+    if(is_dir($dir_path))
+    {
+        $files = scandir($dir_path);
+        
+        for($i = 0; $i < count($files); $i++)
+        {
+            if($files[$i] !='.' && $files[$i] !='..')
+            {
+                // get file name
+                echo "Uh Oh. Looks like you're not suppose to be here, don't worry lets get you back to the home page
+                <br>";
+                
+                // get file extension
+                $file = pathinfo($files[$i]);
+                $extension = $file['extension'];
+                //echo "File Extension-> $extension<br>";
+                
+               // check file extension
+                if(in_array($extension, $extensions_array))
+                {
+                // show image
+                //echo "<img src='$dir_path$files[$i]' style='width:150px;height:225px;'><br>";
+                echo "<a href='index.php'><img src='$dir_path$files[$i]' style='width:150px;height:225px;'><br>";
+                }
+            }
+        }
+    }
 }
 ?>
